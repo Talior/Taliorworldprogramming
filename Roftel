@@ -1,0 +1,61 @@
+program L5;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+
+type
+  begin
+  list = (cost,amount);
+  pricelist = record
+    cena : packed array [1..36] of integer;
+    koli4estvo : packed  array [1..36] of integer;
+    case choose: cost, amount;
+  end;
+var
+  i,n,k : integer;
+  calist : array [1..10000] of pricelist;
+begin
+  {Ввод и инициализация}
+  readln(n);{Ввод количества цен или компьютеров}
+  for i:=1 to n do
+    with pricelist[i] do
+      begin
+        write(' Цена монитора: ');
+        readln(cost);
+        write(' Количество мониторов: ');
+        readln(amount);
+      end;
+    {end with}
+  {end for i}
+  {Вывод данных на экран}
+  readln(k);
+  if k = 0  then
+  {Построение таблицы}
+  writeln('г====================¬');
+  writeln('|        Цена        |');
+  writeln('|--------------------|');
+  for i:=1 to n do
+    begin
+      writeln('| ', pricelist[i].cost ,' ':(10-length(pricelist[i].cost)),' |');
+      if i < n then writeln('|----------------------|');
+      {end if}
+    end;
+  {end for i}
+  writeln('L======================-');
+  else if k = 1 then
+  {Построение таблицы №2}
+  writeln('г====================¬');
+  writeln('|     Количество     |');
+  writeln('|--------------------|');
+  for i:=1 to n do
+    begin
+      writeln('| ', calist[i].amount ,' ', :(20-length(calist[i].amount)),' |');
+      if i < n then writeln('|----------------------|');
+      {end if}
+    end;
+  {end for i}
+  writeln('L======================-');
+  else break;
+end.
